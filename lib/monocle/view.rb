@@ -16,6 +16,9 @@ module Monocle
       !!(@materialized ||= create_command =~ /MATERIALIZED VIEW/i)
     end
 
+    def drop_requested?
+    end
+
     def drop
       debug "Dropping #{name}..."
       self.dependants = get_dependants_from_pg
@@ -46,6 +49,11 @@ module Monocle
     end
 
     def migrate
+      if :drop == slug
+        drop
+        info "#{name} dropped."
+        return true
+      end
       if versions.include?(slug)
         debug "Skipping #{name} as it's already up to date."
         true
@@ -57,6 +65,11 @@ module Monocle
     end
 
     def refresh(concurrently: false)
+      if :drop == slug
+        drop
+        info "#{name} dropped."
+        return true
+      end      
       # We don't refresh normal views
       return false unless materialized?
       _concurrently = " CONCURRENTLY" if concurrently

@@ -9,6 +9,7 @@ module Monocle::Generators
       create_file "db/views/#{file_name}.sql" do
 <<-EOF
 -- Timestamp: #{Time.now}
+DROP MATERIALIZED VIEW IF EXISTS #{file_name};
 CREATE MATERIALIZED VIEW #{file_name} AS
 -- Add your stuff here
 ;

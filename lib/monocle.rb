@@ -11,6 +11,7 @@ require "monocle/view"
 require "monocle/migration"
 
 require "monocle/bump_command"
+require "monocle/drop_command"
 require "monocle/list_command"
 
 module Monocle
@@ -45,6 +46,10 @@ module Monocle
 
     def bump(view_name)
       BumpCommand.new(fetch(view_name)).call
+    end
+
+    def drop(view_name)
+      DropCommand.new(fetch(view_name)).call
     end
 
     def refresh(view_name, concurrently: false)

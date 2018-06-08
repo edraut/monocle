@@ -9,10 +9,16 @@ module Monocle
 
     def generate
       timestamp = File.open path, &:readline
-      fail "can't read timestamp of #{path}! Aborting..." unless timestamp.starts_with? "-- Timestamp: "
-      # Get only the digits out of the timestamp line
-      timestamp.gsub!(/[^\d]/, '')
-      "#{view}_#{timestamp}"
+      case timestamp
+      when /^-- Timestamp:/
+        # Get only the digits out of the timestamp line
+        timestamp.gsub!(/[^\d]/, '')
+        return "#{view}_#{timestamp}"
+      when /^-- Drop/
+        return :drop
+      else
+        fail "can't read timestamp of #{path}! Aborting..."
+      end
     end
   end
 end

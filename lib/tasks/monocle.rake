@@ -20,7 +20,7 @@ namespace :monocle do
     Monocle.refresh(args.view_name)
   end
 
-  desc "Refreshes a given monocle view"
+  desc "Refreshes all monocle views"
   task :refresh_all => :environment do |t, args|
     Monocle.refresh_all
   end
@@ -30,5 +30,11 @@ namespace :monocle do
     Rake::Task['environment'].invoke
     view_name = args.view_name
     Monocle.bump(view_name)
+  end
+
+  desc "drop a monocle view"
+  task :drop, [:view_name] => :environment do |t, args|
+    view_name = args.view_name
+    Monocle.drop(view_name)
   end
 end

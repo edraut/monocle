@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'monocle/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "ar-monocle"
+  spec.name          = "monocle-views"
   spec.version       = Monocle::VERSION
-  spec.authors       = ["Leonardo Bighetti"]
-  spec.email         = ["leo@invitedhome.com"]
+  spec.authors       = ["Leonardo Bighetti", "Eric Draut"]
+  spec.email         = ["eric@invitedhome.com"]
 
   spec.summary       = %q{Monocle helps you manage your DB views.}
   spec.description   = %q{Monocle helps you manage your DB views.}
-  spec.homepage      = "https://github.com/darkside/monocle"
+  spec.homepage      = "https://github.com/tommyfriendhusen08/monocle"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
