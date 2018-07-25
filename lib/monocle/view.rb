@@ -73,7 +73,9 @@ module Monocle
       # We don't refresh normal views
       return false unless materialized?
       _concurrently = " CONCURRENTLY" if concurrently
-      execute "REFRESH MATERIALIZED VIEW#{_concurrently} #{name}"
+      refresh_cmd = "REFRESH MATERIALIZED VIEW#{_concurrently} #{name}"
+      puts "REFRESH MATERIALIZED VIEW#{_concurrently} #{name}"
+      execute refresh_cmd
       true
     rescue ActiveRecord::StatementInvalid => e
       # This view is trying to select from a different view that hasn't been
